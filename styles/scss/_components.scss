@@ -1,0 +1,310 @@
+// Header
+.header {
+  background: linear-gradient(135deg, $primary-color, lighten($primary-color, 15%));
+  color: $white;
+  text-align: center;
+  padding: $spacer * 3 $spacer;
+  margin-bottom: $spacer * 2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  @include respond-to('md') {
+    padding: $spacer * 4 $spacer;
+  }
+  
+  .subtitle {
+    font-size: $font-size-base * 1.1;
+    font-weight: 400;
+    opacity: 0.9;
+    margin-bottom: 0;
+  }
+}
+
+// Container
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacer * 1.5;
+  flex: 1;
+  
+  @include respond-to('lg') {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: $spacer * 2;
+    align-items: flex-start;
+  }
+}
+
+// Form Section
+.form-section {
+  @include card();
+  margin-bottom: $spacer * 2;
+  
+  h2 {
+    color: $primary-color;
+    font-size: $font-size-base * 1.5;
+    margin-bottom: $spacer * 1.5;
+  }
+  
+  .book-form {
+    .form-group {
+      margin-bottom: $spacer * 1.5;
+      
+      label {
+        display: block;
+        margin-bottom: $spacer * 0.5;
+        font-weight: 600;
+        color: $dark-gray;
+      }
+      
+      input[type="text"],
+      select {
+        @include form-control();
+        width: 100%;
+      }
+      
+      select {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right $spacer * 0.5 center;
+        background-size: 16px 12px;
+        padding-right: $spacer * 2.5;
+      }
+    }
+    
+    .btn {
+      width: 100%;
+      padding: $spacer * 0.75 $spacer;
+      font-weight: 600;
+      
+      .icon {
+        margin-right: $spacer * 0.5;
+      }
+    }
+  }
+}
+
+// Book List Section
+.book-list-section {
+  @include card();
+  
+  .filters {
+    margin-bottom: $spacer * 1.5;
+    
+    h2 {
+      color: $primary-color;
+      font-size: $font-size-base * 1.5;
+      margin-bottom: $spacer;
+    }
+    
+    .filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacer * 0.5;
+      margin-bottom: $spacer;
+      
+      .btn-filter {
+        @include button-variant($light-gray, $dark-gray);
+        padding: $spacer * 0.5 $spacer * 0.75;
+        font-size: $font-size-sm;
+        font-weight: 500;
+        border-radius: $border-radius * 2;
+        
+        &.active {
+          @include button-variant($primary-color);
+        }
+        
+        .icon {
+          margin-right: $spacer * 0.25;
+        }
+      }
+    }
+    
+    .stats {
+      font-size: $font-size-sm;
+      color: lighten($dark-gray, 20%);
+      
+      span {
+        font-weight: 600;
+        color: $primary-color;
+      }
+    }
+  }
+  
+  .book-list {
+    border-radius: $border-radius;
+    overflow: hidden;
+    
+    .empty-state {
+      @include flex-center();
+      flex-direction: column;
+      padding: $spacer * 3 $spacer;
+      text-align: center;
+      color: lighten($dark-gray, 40%);
+      
+      .empty-icon {
+        margin-bottom: $spacer;
+        color: lighten($dark-gray, 60%);
+      }
+      
+      p {
+        margin-bottom: 0;
+        max-width: 300px;
+      }
+    }
+    
+    .book-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: $spacer;
+      padding: $spacer;
+      border-bottom: 1px solid $light-gray;
+      transition: $transition-base;
+      
+      &:last-child {
+        border-bottom: none;
+      }
+      
+      &:hover {
+        background-color: lighten($light-gray, 4%);
+      }
+      
+      .book-info {
+        h3 {
+          font-size: $font-size-base * 1.1;
+          margin-bottom: $spacer * 0.25;
+          color: $dark-gray;
+        }
+        
+        .book-meta {
+          display: flex;
+          flex-wrap: wrap;
+          gap: $spacer;
+          font-size: $font-size-sm;
+          color: lighten($dark-gray, 20%);
+          
+          span {
+            display: flex;
+            align-items: center;
+            
+            .icon {
+              margin-right: $spacer * 0.25;
+              width: 14px;
+              height: 14px;
+            }
+            
+            &.status {
+              padding: $spacer * 0.125 $spacer * 0.5;
+              border-radius: $border-radius * 2;
+              font-size: $font-size-sm * 0.9;
+              font-weight: 600;
+              
+              &.available {
+                background-color: rgba($success, 0.1);
+                color: darken($success, 10%);
+              }
+              
+              &.borrowed {
+                background-color: rgba($accent-color, 0.1);
+                color: darken($accent-color, 20%);
+              }
+              
+              &.reserved {
+                background-color: rgba($secondary-color, 0.1);
+                color: darken($secondary-color, 10%);
+              }
+            }
+          }
+        }
+      }
+      
+      .book-actions {
+        display: flex;
+        align-items: center;
+        
+        .btn-icon {
+          background: none;
+          border: none;
+          color: lighten($dark-gray, 40%);
+          padding: $spacer * 0.5;
+          border-radius: 50%;
+          cursor: pointer;
+          transition: $transition-base;
+          
+          &:hover {
+            color: $error;
+            background-color: rgba($error, 0.1);
+          }
+          
+          .icon {
+            width: 18px;
+            height: 18px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Status badges
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: $spacer * 0.25 $spacer * 0.5;
+  border-radius: $border-radius * 2;
+  font-size: $font-size-sm * 0.9;
+  font-weight: 600;
+  
+  .icon {
+    margin-right: $spacer * 0.25;
+    width: 12px;
+    height: 12px;
+  }
+  
+  &--available {
+    background-color: rgba($success, 0.1);
+    color: darken($success, 10%);
+  }
+  
+  &--borrowed {
+    background-color: rgba($accent-color, 0.1);
+    color: darken($accent-color, 20%);
+  }
+  
+  &--reserved {
+    background-color: rgba($secondary-color, 0.1);
+    color: darken($secondary-color, 10%);
+  }
+}
+
+// Responsive adjustments
+@include respond-to('md') {
+  .container {
+    padding: 0 $spacer * 2;
+  }
+  
+  .form-section {
+    position: sticky;
+    top: $spacer * 2;
+  }
+}
+
+// Print styles
+@media print {
+  .header,
+  .filters,
+  .form-section,
+  .book-actions {
+    display: none !important;
+  }
+  
+  .book-list-section {
+    box-shadow: none;
+    padding: 0;
+  }
+  
+  .book-item {
+    break-inside: avoid;
+  }
+}

@@ -1,0 +1,123 @@
+// Mixins for responsive design
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "Unknown breakpoint: #{$breakpoint}.";
+  }
+}
+
+// Button mixin
+@mixin button-variant($background, $color: $white, $hover-background: darken($background, 7.5%)) {
+  background-color: $background;
+  color: $color;
+  border: 1px solid darken($background, 5%);
+  transition: $transition-base;
+  
+  &:hover, &:focus {
+    background-color: $hover-background;
+    color: $color;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+}
+
+// Form control mixin
+@mixin form-control() {
+  display: block;
+  width: 100%;
+  padding: $spacer * 0.5 $spacer;
+  font-size: $font-size-base;
+  line-height: $line-height;
+  color: $dark-gray;
+  background-color: $white;
+  background-clip: padding-box;
+  border: 1px solid darken($light-gray, 10%);
+  border-radius: $border-radius;
+  transition: $transition-base;
+  
+  &:focus {
+    border-color: $primary-color;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.25);
+  }
+  
+  &::placeholder {
+    color: lighten($dark-gray, 40%);
+    opacity: 1;
+  }
+}
+
+// Card mixin
+@mixin card() {
+  background: $white;
+  border-radius: $border-radius-lg;
+  box-shadow: $box-shadow;
+  padding: $spacer * 1.5;
+  margin-bottom: $spacer * 1.5;
+  
+  @include respond-to('md') {
+    padding: $spacer * 2;
+  }
+}
+
+// Flexbox mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// Grid mixin
+@mixin grid($cols: 1, $gap: $spacer) {
+  display: grid;
+  grid-template-columns: repeat($cols, 1fr);
+  gap: $gap;
+  
+  @include respond-to('md') {
+    grid-template-columns: repeat($cols, 1fr);
+  }
+}
+
+// Text overflow
+@mixin text-truncate() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Animation mixins
+@mixin fade-in($duration: 0.3s) {
+  animation: fadeIn $duration ease-in;
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}
+
+// Responsive font size
+@mixin font-responsive($min-size, $max-size) {
+  font-size: $min-size;
+  
+  @media (min-width: map-get($breakpoints, 'sm')) {
+    font-size: calc(#{$min-size} + (#{strip-unit($max-size - $min-size)}) * ((100vw - 320px) / (1200 - 320)));
+  }
+  
+  @media (min-width: 1200px) {
+    font-size: $max-size;
+  }
+}

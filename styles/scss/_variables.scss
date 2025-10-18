@@ -1,0 +1,62 @@
+// Colors
+$primary-color: #2A4D69;
+$accent-color: #D4A017;
+$bg-color: #F9F6EE;
+$secondary-color: #4B86B4;
+$light-gray: #f5f5f5;
+$dark-gray: #333;
+$white: #fff;
+$error: #e74c3c;
+$success: #2ecc71;
+
+// Typography
+$font-family: 'Open Sans', sans-serif;
+$font-size-base: 1rem;
+$font-size-lg: 1.25rem;
+$font-size-sm: 0.875rem;
+$line-height: 1.6;
+
+// Spacing
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+);
+
+// Breakpoints
+$breakpoints: (
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px
+);
+
+// Border radius
+$border-radius: 4px;
+$border-radius-lg: 8px;
+
+// Box shadow
+$box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+$box-shadow-lg: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+// Transitions
+$transition-base: all 0.3s ease;
+
+// Icons
+$icon-size: 1.5rem;
+$icon-size-sm: 1rem;
+
+// Z-index
+$z-index: (
+  'dropdown': 1000,
+  'sticky': 1020,
+  'fixed': 1030,
+  'modal-backdrop': 1040,
+  'modal': 1050,
+  'popover': 1060,
+  'tooltip': 1070
+);
